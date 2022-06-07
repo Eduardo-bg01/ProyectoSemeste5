@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ranchonuevoModelStoreContainer" CdmEntityContainer="ranchonuevoEntities">
+    <EntitySetMapping Name="actualizacion">
+      <EntityTypeMapping TypeName="ranchonuevoModel.actualizacion">
+        <MappingFragment StoreEntitySet="actualizacion">
+          <ScalarProperty Name="idActualizacion" ColumnName="idActualizacion" />
+          <ScalarProperty Name="temperatura" ColumnName="temperatura" />
+          <ScalarProperty Name="nVolteos" ColumnName="nVolteos" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="fechaActualizacion" ColumnName="fechaActualizacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="configuracion">
+      <EntityTypeMapping TypeName="ranchonuevoModel.configuracion">
+        <MappingFragment StoreEntitySet="configuracion">
+          <ScalarProperty Name="idConfiguracion" ColumnName="idConfiguracion" />
+          <ScalarProperty Name="consToneladas" ColumnName="consToneladas" />
+          <ScalarProperty Name="nFilasLote" ColumnName="nFilasLote" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fila">
+      <EntityTypeMapping TypeName="ranchonuevoModel.fila">
+        <MappingFragment StoreEntitySet="fila">
+          <ScalarProperty Name="idFila" ColumnName="idFila" />
+          <ScalarProperty Name="identificadorFila" ColumnName="identificadorFila" />
+          <ScalarProperty Name="nViajes" ColumnName="nViajes" />
+          <ScalarProperty Name="cCascarrillo" ColumnName="cCascarrillo" />
+          <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+          <ScalarProperty Name="toneladasLinea" ColumnName="toneladasLinea" />
+          <ScalarProperty Name="Produccion" ColumnName="Produccion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="lote">
+      <EntityTypeMapping TypeName="ranchonuevoModel.lote">
+        <MappingFragment StoreEntitySet="lote">
+          <ScalarProperty Name="idLote" ColumnName="idLote" />
+          <ScalarProperty Name="identificadorLote" ColumnName="identificadorLote" />
+          <ScalarProperty Name="nFilas" ColumnName="nFilas" />
+          <ScalarProperty Name="fecha_Inicio" ColumnName="fecha_Inicio" />
+          <ScalarProperty Name="fecha_Termino" ColumnName="fecha_Termino" />
+          <ScalarProperty Name="estadoLote" ColumnName="estadoLote" />
+          <ScalarProperty Name="fechaRegistro" ColumnName="fechaRegistro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rol">
+      <EntityTypeMapping TypeName="ranchonuevoModel.rol">
+        <MappingFragment StoreEntitySet="rol">
+          <ScalarProperty Name="idRol" ColumnName="idRol" />
+          <ScalarProperty Name="tipoRol" ColumnName="tipoRol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuario">
+      <EntityTypeMapping TypeName="ranchonuevoModel.usuario">
+        <MappingFragment StoreEntitySet="usuario">
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="usuario1" ColumnName="usuario" />
+          <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="fila_actualizacion" TypeName="ranchonuevoModel.fila_actualizacion" StoreEntitySet="fila_actualizacion">
+      <EndProperty Name="actualizacion">
+        <ScalarProperty Name="idActualizacion" ColumnName="actID" />
+      </EndProperty>
+      <EndProperty Name="fila">
+        <ScalarProperty Name="idFila" ColumnName="filaID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="lote_tiene_filas" TypeName="ranchonuevoModel.lote_tiene_filas" StoreEntitySet="lote_tiene_filas">
+      <EndProperty Name="fila">
+        <ScalarProperty Name="idFila" ColumnName="fila_ID" />
+      </EndProperty>
+      <EndProperty Name="lote">
+        <ScalarProperty Name="idLote" ColumnName="loteID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="usuario_hace_actualizacion" TypeName="ranchonuevoModel.usuario_hace_actualizacion" StoreEntitySet="usuario_hace_actualizacion">
+      <EndProperty Name="actualizacion">
+        <ScalarProperty Name="idActualizacion" ColumnName="actualizacion_ID" />
+      </EndProperty>
+      <EndProperty Name="usuario">
+        <ScalarProperty Name="idUsuario" ColumnName="usr_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="usuario_tiene_rol" TypeName="ranchonuevoModel.usuario_tiene_rol" StoreEntitySet="usuario_tiene_rol">
+      <EndProperty Name="rol">
+        <ScalarProperty Name="idRol" ColumnName="rol_ID" />
+      </EndProperty>
+      <EndProperty Name="usuario">
+        <ScalarProperty Name="idUsuario" ColumnName="usuarioID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

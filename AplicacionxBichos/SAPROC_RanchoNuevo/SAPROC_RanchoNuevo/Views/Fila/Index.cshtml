@@ -1,0 +1,168 @@
+﻿@model List<SAPROC_RanchoNuevo.Models.TableViewModel.FilaViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+@Styles.Render("~/css/admin.css")
+@*INDEX PARA MOSTRAR FILAS*@
+<body>
+    <article>
+        <div id="Grande">
+            <div id="mayor">
+
+                <div id="mayor1">
+                    <input type="checkbox" id="btn-modal21">
+                    <label for="btn-modal21" class="lbl-modal21"><img src="~/Images/actualizar.png" width="30px"> Actualizar Fila</label>
+                    <div class="modal21">
+                        <div class="conten21">
+                            <header>
+                                <center><strong>Actualizar Fila</strong></center>
+                            </header>
+                            <label for="btn-modal21">X</label>
+                            <div class="contenido21">
+                                <form action="/Actualizar/Add">
+                                    Temperatura <input type="text" name="temperatura" required>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    Volteos: <input type="text" name="volteos" required>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    Observaciones: <br> <textarea name="observaciones" rows="8" cols="90" required> </textarea>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <center> <input type="reset" name="Limpiar" /> <input type="submit" name="Aceptar" value="Aceptar" /> </center>
+                                </form>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div id="mayor2">
+                    <input type="checkbox" id="btn-modal4">
+                    <label for="btn-modal4" class="lbl-modal4"><img src="~/Images/pdf.png" width="30px"> PDF</label>
+                    <div class="modal4">
+                        <div class="conten4">
+                            <header>
+                                <center><strong>PDF</strong></center>
+                            </header>
+                            <label for="btn-modal4">X</label>
+                            <div class="contenido4">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="mayor3">
+                    <input type="checkbox" id="btn-modal5">
+                    <label for="btn-modal5" class="lbl-modal5"><img src="~/Images/excel.png" width="30px"> Excel</label>
+                    <div class="modal5">
+                        <div class="conten5">
+                            <header>
+                                <center><strong>Excel</strong></center>
+                            </header>
+                            <label for="btn-modal5">X</label>
+                            <div class="contenido5">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="mayor4">
+                    <input type="checkbox" id="btn-modal6">
+                    <label for="btn-modal6" class="lbl-modal6"><img src="~/Images/Imprimir.png" width="30px"> Imprimir</label>
+                    <div class="modal6">
+                        <div class="conten6">
+                            <header>
+                                <center><strong>Imprimir</strong></center>
+                            </header>
+                            <label for="btn-modal6">X</label>
+                            <div class="contenido6">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="gran">
+                <div id="gran1">
+                    <center> <h2> FILAS </h2> </center>
+                    <table id="tabla" border="">
+                        <tr>
+                            <th scope="row">ID</th>
+                            <th scope="row">Identificador fila</th>
+                            <th scope="row">Numero de viajes</th>
+                            <th scope="row">Cantidad de cascarrillo</th>
+                            <th scope="row">Comentarios</th>
+                            <th scope="row">Toneladas</th>
+                            <th scope="row">Produccion</th>
+                        </tr>
+                        @foreach (var Oelemento in Model)
+                        {
+                            <tr>
+                                <td>@Oelemento.idFila</td>
+                                <td>@Oelemento.identificadorFila</td>
+                                <td>@Oelemento.nViajes</td>
+                                <td>@Oelemento.cCascarrillo</td>
+                                <td>@Oelemento.Comentarios</td>
+                                <td>@Oelemento.toneladasLinea</td>
+                                <td>@Oelemento.produccion</td>
+                                <td>
+                                    <input type="checkbox" id="btn-modal3">
+                                    <label for="btn-modal3" class="lbl-modal3">Editar</label>
+                                    <div class="modal3">
+                                        <div class="conten3">
+                                            <header>
+                                                <center><strong>Editar fila</strong></center>
+                                            </header>
+                                            <label for="btn-modal3">X</label>
+                                            <div class="contenido3">
+                                                <form action="/Fila/Edit">
+                                                    IDFILA: <input type="text" name="idfila">
+                                                    <br>
+                                                    <br>
+                                                    <br>
+                                                    Numero viajes <input type="text" name="nviajes">
+                                                    <br>
+                                                    <br>
+                                                    <br>
+                                                    Cantidas cascarrilo/Rastrojo: <input type="text" name="cantidad">
+                                                    <br>
+                                                    <br>
+                                                    <br>
+                                                    Toneladas: <input type="text" name="toneladas">
+                                                    <br>
+                                                    <br>
+                                                    <br>
+                                                    Produccion: <input type="text" name="prod">
+                                                    <br>
+                                                    <br>
+                                                    <br>
+                                                    Comentarios: <br> <textarea name="comentarios" rows="8" cols="90"> </textarea>
+                                                    <br>
+                                                    <br>
+                                                    <br>
+                                                    <center> <input type="reset" name="Limpiar" /> <input type="submit" name="Aceptar" value="Aceptar" /> </center>
+                                                </form>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </article>
+</body>

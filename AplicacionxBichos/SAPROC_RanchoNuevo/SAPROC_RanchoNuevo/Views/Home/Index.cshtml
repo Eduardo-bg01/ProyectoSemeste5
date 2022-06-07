@@ -1,0 +1,247 @@
+﻿
+@{
+    ViewBag.Title = "Home Page";
+}
+@Styles.Render("~/css/admin.css")
+
+<!--<body>
+    <article>
+        <br> <br> <br> <br><br>
+        <div id="Grande">
+            <div id="mayor">
+                <div id="mayor1">
+                    <input type="checkbox" id="btn-modal3">
+                    <label for="btn-modal3" class="lbl-modal3"><img src="~/Images/actualizar.png" width="30px"> Actualizar Fila</label>
+                    <div class="modal3">
+                        <div class="conten3">
+                            <header>
+                                <center><strong>Actualizar Fila</strong></center>
+                            </header>
+                            <label for="btn-modal3">X</label>
+                            <div class="contenido3">
+                                <form action="">
+                                    Lota: A - Fila: <input type="text" name="lf">
+                                    <br>
+                                    <br>
+                                    <br>
+                                    Temperatura <input type="text" name="tem">
+                                    <br>
+                                    <br>
+                                    <br>
+                                    # de volteos: <input type="text" name="volteos">
+                                    <br>
+                                    <br>
+                                    <br>
+                                    Observaciones: <br> <textarea name="mensaje" rows="8" cols="90"> </textarea>
+                                    <br>
+                                    <br>
+                                    <br>
+
+
+                                    <center> <input type="reset" name="Limpiar" /> <input type="submit" name="Aceptar" value="Aceptar" /> </center>
+                                </form>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div id="mayor2">
+
+                    <input type="checkbox" id="btn-modal4">
+                    <label for="btn-modal4" class="lbl-modal4"><img src="~/Images/pdf.png" width="30px"> PDF</label>
+                    <div class="modal4">
+                        <div class="conten4">
+                            <header>
+                                <center><strong>PDF</strong></center>
+                            </header>
+                            <label for="btn-modal4">X</label>
+                            <div class="contenido4">
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div id="mayor3">
+
+                    <input type="checkbox" id="btn-modal5" " >
+                    <label for="btn-modal5" class="lbl-modal5"><img src="~/Images/excel.png" width="30px"> Excel</label>
+                    <div class="modal5">
+                        <div class="conten5">
+                            <header>
+                                <center><strong>Excel</strong></center>
+                            </header>
+                            <label for="btn-modal5">X</label>
+                            <div class="contenido5">
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div id="mayor4">
+
+                    <input type="checkbox" id="btn-modal6">
+                    <label for="btn-modal6" class="lbl-modal6"><img src="~/Images/Imprimir.png" width="30px"> Imprimir</label>
+                    <div class="modal6">
+                        <div class="conten6">
+                            <header>
+                                <center><strong>Imprimir</strong></center>
+                            </header>
+                            <label for="btn-modal6">X</label>
+                            <div class="contenido6">
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="gran">
+                <div id="gran1">-->
+@**@
+<!--<table id="tabla" border="">
+            <tr>
+                <th scope="row"> -></th>
+                <th scope="row">No. fila y Lote</th>
+                <th scope="row">Fecha de inicio</th>
+                <th scope="row">Fecha de terminación</th>
+                <th scope="row">Temperatura</th>
+                <th scope="row"># De volteos</th>
+                <th scope="row"># De viajes de estiercol</th>
+                <th scope="row">Cantidad de rastrojo</th>
+                <th scope="row">Toneladas de linea</th>
+                <th scope="row">Producción</th>
+                <th scope="row">Conversión(Estiercol/Composta)</th>
+                <th scope="row">Estado</th>
+            </tr>
+            <tr>
+                    <td>-</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>-</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>-</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>-</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>-</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>-</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>-</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+        </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </article>
+
+    <footer>
+    </footer>
+
+</body>-->

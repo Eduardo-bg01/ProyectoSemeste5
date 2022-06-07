@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ranchonuevoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ranchonuevoEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="actualizacion" EntityType="ranchonuevoModel.actualizacion" />
+    <EntitySet Name="configuracion" EntityType="ranchonuevoModel.configuracion" />
+    <EntitySet Name="fila" EntityType="ranchonuevoModel.fila" />
+    <EntitySet Name="lote" EntityType="ranchonuevoModel.lote" />
+    <EntitySet Name="rol" EntityType="ranchonuevoModel.rol" />
+    <EntitySet Name="user" EntityType="ranchonuevoModel.user" />
+    <AssociationSet Name="fila_actualizacion" Association="ranchonuevoModel.fila_actualizacion">
+      <End Role="actualizacion" EntitySet="actualizacion" />
+      <End Role="fila" EntitySet="fila" />
+    </AssociationSet>
+    <AssociationSet Name="lote_tiene_filas" Association="ranchonuevoModel.lote_tiene_filas">
+      <End Role="fila" EntitySet="fila" />
+      <End Role="lote" EntitySet="lote" />
+    </AssociationSet>
+    <AssociationSet Name="usuario_hace_actualizacion" Association="ranchonuevoModel.usuario_hace_actualizacion">
+      <End Role="actualizacion" EntitySet="actualizacion" />
+      <End Role="user" EntitySet="user" />
+    </AssociationSet>
+    <AssociationSet Name="usuario_tiene_rol" Association="ranchonuevoModel.usuario_tiene_rol">
+      <End Role="rol" EntitySet="rol" />
+      <End Role="user" EntitySet="user" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="actualizacion">
+    <Key>
+      <PropertyRef Name="idActualizacion" />
+    </Key>
+    <Property Name="idActualizacion" Type="Int32" Nullable="false" />
+    <Property Name="temperatura" Type="Double" Nullable="false" />
+    <Property Name="nVolteos" Type="Int32" Nullable="false" />
+    <Property Name="Observaciones" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="fechaActualizacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="fila" Relationship="ranchonuevoModel.fila_actualizacion" FromRole="actualizacion" ToRole="fila" />
+    <NavigationProperty Name="user" Relationship="ranchonuevoModel.usuario_hace_actualizacion" FromRole="actualizacion" ToRole="user" />
+  </EntityType>
+  <EntityType Name="configuracion">
+    <Key>
+      <PropertyRef Name="idConfiguracion" />
+    </Key>
+    <Property Name="idConfiguracion" Type="Int32" Nullable="false" />
+    <Property Name="consToneladas" Type="Double" Nullable="false" />
+    <Property Name="nFilasLote" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="fila">
+    <Key>
+      <PropertyRef Name="idFila" />
+    </Key>
+    <Property Name="idFila" Type="Int32" Nullable="false" />
+    <Property Name="identificadorFila" Type="Int32" Nullable="false" />
+    <Property Name="nViajes" Type="Int32" Nullable="false" />
+    <Property Name="cCascarrillo" Type="Double" Nullable="false" />
+    <Property Name="Comentarios" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="toneladasLinea" Type="Double" Nullable="false" />
+    <Property Name="Produccion" Type="Double" Nullable="false" />
+    <NavigationProperty Name="actualizacion" Relationship="ranchonuevoModel.fila_actualizacion" FromRole="fila" ToRole="actualizacion" />
+    <NavigationProperty Name="lote" Relationship="ranchonuevoModel.lote_tiene_filas" FromRole="fila" ToRole="lote" />
+  </EntityType>
+  <EntityType Name="lote">
+    <Key>
+      <PropertyRef Name="idLote" />
+    </Key>
+    <Property Name="idLote" Type="Int32" Nullable="false" />
+    <Property Name="identificadorLote" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="nFilas" Type="Int32" Nullable="false" />
+    <Property Name="fecha_Inicio" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="fecha_Termino" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="estadoLote" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="fila" Relationship="ranchonuevoModel.lote_tiene_filas" FromRole="lote" ToRole="fila" />
+  </EntityType>
+  <EntityType Name="rol">
+    <Key>
+      <PropertyRef Name="idRol" />
+    </Key>
+    <Property Name="idRol" Type="Int32" Nullable="false" />
+    <Property Name="tipoRol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="user" Relationship="ranchonuevoModel.usuario_tiene_rol" FromRole="rol" ToRole="user" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="idUsuario" />
+    </Key>
+    <Property Name="idUsuario" Type="Int32" Nullable="false" />
+    <Property Name="usuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="contraseña" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="actualizacion" Relationship="ranchonuevoModel.usuario_hace_actualizacion" FromRole="user" ToRole="actualizacion" />
+    <NavigationProperty Name="rol" Relationship="ranchonuevoModel.usuario_tiene_rol" FromRole="user" ToRole="rol" />
+  </EntityType>
+  <Association Name="fila_actualizacion">
+    <End Type="ranchonuevoModel.actualizacion" Role="actualizacion" Multiplicity="*" />
+    <End Type="ranchonuevoModel.fila" Role="fila" Multiplicity="*" />
+  </Association>
+  <Association Name="lote_tiene_filas">
+    <End Type="ranchonuevoModel.fila" Role="fila" Multiplicity="*" />
+    <End Type="ranchonuevoModel.lote" Role="lote" Multiplicity="*" />
+  </Association>
+  <Association Name="usuario_hace_actualizacion">
+    <End Type="ranchonuevoModel.actualizacion" Role="actualizacion" Multiplicity="*" />
+    <End Type="ranchonuevoModel.user" Role="user" Multiplicity="*" />
+  </Association>
+  <Association Name="usuario_tiene_rol">
+    <End Type="ranchonuevoModel.rol" Role="rol" Multiplicity="*" />
+    <End Type="ranchonuevoModel.user" Role="user" Multiplicity="*" />
+  </Association>
+</Schema>

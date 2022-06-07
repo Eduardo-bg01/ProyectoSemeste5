@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ranchonuevoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="actualizacion">
+    <Key>
+      <PropertyRef Name="idActualizacion" />
+    </Key>
+    <Property Name="idActualizacion" Type="Int32" Nullable="false" />
+    <Property Name="temperatura" Type="Double" Nullable="false" />
+    <Property Name="nVolteos" Type="Int32" Nullable="false" />
+    <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fechaActualizacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="fila" Relationship="Self.fila_actualizacion" FromRole="actualizacion" ToRole="fila" />
+    <NavigationProperty Name="usuario" Relationship="Self.usuario_hace_actualizacion" FromRole="actualizacion" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="configuracion">
+    <Key>
+      <PropertyRef Name="idConfiguracion" />
+    </Key>
+    <Property Name="idConfiguracion" Type="Int32" Nullable="false" />
+    <Property Name="consToneladas" Type="Double" Nullable="false" />
+    <Property Name="nFilasLote" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="fila">
+    <Key>
+      <PropertyRef Name="idFila" />
+    </Key>
+    <Property Name="idFila" Type="Int32" Nullable="false" />
+    <Property Name="identificadorFila" Type="Int32" Nullable="false" />
+    <Property Name="nViajes" Type="Int32" Nullable="false" />
+    <Property Name="cCascarrillo" Type="Double" Nullable="false" />
+    <Property Name="Comentarios" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="toneladasLinea" Type="Double" Nullable="false" />
+    <Property Name="Produccion" Type="Double" Nullable="false" />
+    <NavigationProperty Name="actualizacion" Relationship="Self.fila_actualizacion" FromRole="fila" ToRole="actualizacion" />
+    <NavigationProperty Name="lote" Relationship="Self.lote_tiene_filas" FromRole="fila" ToRole="lote" />
+  </EntityType>
+  <EntityType Name="lote">
+    <Key>
+      <PropertyRef Name="idLote" />
+    </Key>
+    <Property Name="idLote" Type="Int32" Nullable="false" />
+    <Property Name="identificadorLote" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nFilas" Type="Int32" Nullable="false" />
+    <Property Name="fecha_Inicio" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="fecha_Termino" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="estadoLote" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="fila" Relationship="Self.lote_tiene_filas" FromRole="lote" ToRole="fila" />
+  </EntityType>
+  <EntityType Name="rol">
+    <Key>
+      <PropertyRef Name="idRol" />
+    </Key>
+    <Property Name="idRol" Type="Int32" Nullable="false" />
+    <Property Name="tipoRol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="usuario" Relationship="Self.usuario_tiene_rol" FromRole="rol" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="usuario">
+    <Key>
+      <PropertyRef Name="idUsuario" />
+    </Key>
+    <Property Name="idUsuario" Type="Int32" Nullable="false" />
+    <Property Name="usuario1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="contraseña" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="actualizacion" Relationship="Self.usuario_hace_actualizacion" FromRole="usuario" ToRole="actualizacion" />
+    <NavigationProperty Name="rol" Relationship="Self.usuario_tiene_rol" FromRole="usuario" ToRole="rol" />
+  </EntityType>
+  <Association Name="fila_actualizacion">
+    <End Role="actualizacion" Type="Self.actualizacion" Multiplicity="*" />
+    <End Role="fila" Type="Self.fila" Multiplicity="*" />
+  </Association>
+  <Association Name="lote_tiene_filas">
+    <End Role="fila" Type="Self.fila" Multiplicity="*" />
+    <End Role="lote" Type="Self.lote" Multiplicity="*" />
+  </Association>
+  <Association Name="usuario_hace_actualizacion">
+    <End Role="actualizacion" Type="Self.actualizacion" Multiplicity="*" />
+    <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+  </Association>
+  <Association Name="usuario_tiene_rol">
+    <End Role="rol" Type="Self.rol" Multiplicity="*" />
+    <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="ranchonuevoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="actualizacion" EntityType="Self.actualizacion" />
+    <EntitySet Name="configuracion" EntityType="Self.configuracion" />
+    <EntitySet Name="fila" EntityType="Self.fila" />
+    <EntitySet Name="lote" EntityType="Self.lote" />
+    <EntitySet Name="rol" EntityType="Self.rol" />
+    <EntitySet Name="usuario" EntityType="Self.usuario" />
+    <AssociationSet Name="fila_actualizacion" Association="Self.fila_actualizacion">
+      <End Role="actualizacion" EntitySet="actualizacion" />
+      <End Role="fila" EntitySet="fila" />
+    </AssociationSet>
+    <AssociationSet Name="lote_tiene_filas" Association="Self.lote_tiene_filas">
+      <End Role="fila" EntitySet="fila" />
+      <End Role="lote" EntitySet="lote" />
+    </AssociationSet>
+    <AssociationSet Name="usuario_hace_actualizacion" Association="Self.usuario_hace_actualizacion">
+      <End Role="actualizacion" EntitySet="actualizacion" />
+      <End Role="usuario" EntitySet="usuario" />
+    </AssociationSet>
+    <AssociationSet Name="usuario_tiene_rol" Association="Self.usuario_tiene_rol">
+      <End Role="rol" EntitySet="rol" />
+      <End Role="usuario" EntitySet="usuario" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

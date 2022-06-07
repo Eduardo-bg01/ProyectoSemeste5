@@ -1,0 +1,52 @@
+﻿@model List<SAPROC_RanchoNuevo.Models.TableViewModel.LoteViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+@Styles.Render("~/css/estilos.css")
+<article>
+
+    <div class="login-box">
+        <h1>Inicio de sesión</h1>
+        <form id="frm">
+            <div class="col-lg-6 col-lg-offset-3">
+
+                <label for="username">Usuario</label>
+                <input type="text" name="usuario" placeholder="Ingrese su usuario">
+
+
+                <label for="password">Contraseña</label>
+                <input type="password" name="pass" placeholder="Ingrese su contraseña">
+
+                <input type="submit" class="btn btn-success" value="Entrar" />
+                <a href="#">¿Olvidaste tu contraseña? Click aquí</a><br>
+                <a href="#">¿No tienes cuenta? Click aquí</a>
+            </div>
+        </form>
+    </div>
+</article>
+
+@section scripts{
+    <script>
+    $(document).ready(function () {
+
+        $("#frm").submit(function (e) {
+            e.preventDefault();
+
+            url = "@Url.Content("~/Acces/Enter")"
+            parametros = $(this).serialize();
+
+            $.post(url, parametros, function (data) {
+                if (data == "1") {
+                    document.location.href = "@Url.Content("~/")";
+                } else {
+                    alert(data)
+                }
+            })
+        })
+    })
+    </script>
+
+
+}
+

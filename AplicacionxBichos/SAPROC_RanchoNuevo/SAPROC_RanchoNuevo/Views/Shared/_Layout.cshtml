@@ -1,0 +1,229 @@
+﻿@*@model List<SAPROC_RanchoNuevo.Models.TableViewModel.LoteViewModel>*@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    <link rel="shortcut icon" href="~/Images/logoRanchoNuevo.png" type="image/x-icon">
+
+</head>
+<body>
+    <header>
+        <div id="contenedor">
+            <div id="contenedor1">
+                <img id="logoR" src="~/Images/logoRanchoNuevo.png" alt="logo">
+                <h1>SAPROC</h1>
+            </div>
+
+            <div id="contenedor3">
+                <div id="subcontenedor">
+                    <br>
+                    <br>
+                    <img id="imgusuario" src="~/Images/user.png" width="25px" alt="usuario">
+                    <p id="texto">    admin@ranchonuevo.mx</p>
+                </div>
+                <div id="subcontenedor2">
+                    <p id="texto2"><strong> <b>  Rol:</b></strong> Administrador </p>
+                </div>
+                <div id="subcontenedor3">
+                    <img src="~/Images/Logout.png" width="25px" /> @Html.ActionLink("Cerrar sesión", "Logoff", "Cerrar", null, new { @style = "text-decoration:none; color: #000;" })
+                </div>
+            </div>
+
+        </div>
+        <hr id="barra1">
+        <div id="principal">
+            <div id="principal1">
+                <input type="checkbox" id="btn-modal1">
+                <label for="btn-modal1" class="lbl-modal1"><img src="~/Images/Registrar.png" width="30px"> Registrar Lote</label>
+                <div class="modal1">
+                    <div class="conten1">
+                        <header>
+                            <center><strong>Registrar Lote</strong></center>
+                        </header>
+                        <label for="btn-modal1">X</label>
+                        <br>
+                        <div class="contenido1">
+                            @*OJO AQUI*@
+                            <form action="/Lote/Add" name="registroLote" id="registro" onsubmit='return validar()'>
+                                Fecha de inicio: <input type="date" name="fechai" required>
+                                <br>
+                                <br>
+                                <br>
+                                Lote:
+                                <select name="lote" required>
+                                    <option>A</option>
+                                    <option>B</option>
+                                    <option>C</option>
+                                    <option>D</option>
+                                    <option>E</option>
+                                    <option>F</option>
+                                    <option>G</option>
+                                    <option>H</option>
+                                </select>
+                                <br>
+                                <br>
+                                <br>
+
+
+
+                                Numero de filas: <input type="text" name="filas" required>
+                                <br>
+                                <br>
+                                <br>
+                                <center> <input type="reset" name="Limpiar" /> <input type="submit" name="Aceptar" value="Aceptar" /> </center>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*<div id="principal7">
+
+                <input type="checkbox" id="btn-modal7">
+                <label for="btn-modal7" class="lbl-modal7"><img src="~/Images/finalizar.png" width="30px"> Finalizar Lote</label>
+                <div class="modal7">
+                    <div class="conten7">
+                        <header>
+                            <center><strong>Finalizar Lote</strong></center>
+                        </header>
+                        <label for="btn-modal7">X</label>
+                        <div class="contenido7">
+                            <form action="">
+                                No. fila y lote: <input type="text" name="no" required>
+                                <br>
+                                <br>
+                                <br>
+                                Fecha de termino: <input type="text" name="fechaf" required>
+                                <br>
+                                <br>
+                                <br>
+                                Produccón: <input type="text" name="produc" required>
+                                <br>
+                                <br>
+                                <br>
+                                Toneladas de linea: <input type="text" name="ton" required>
+                                <br>
+                                <br>
+                                <br>
+
+                                <center> <input type="reset" name="Limpiar" /> <input type="submit" name="Aceptar" value="Aceptar" /> </center>
+                            </form>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>*@
+
+            <div id="principal8">
+                <input type="checkbox" id="btn-modal8">
+                <label for="btn-modal8" class="lbl-modal8"><img src="~/Images/modify.png" width="30px"> Modificar Lote</label>
+                <div class="modal8">
+                    <div class="conten8">
+                        <header>
+                            <center><strong>Modificar Lote</strong></center>
+                        </header>
+                        <label for="btn-modal8">X</label>
+                        <div class="contenido8">
+                            <form action="/Lote/Edit" method="post">
+                                Ingrese el id del Lote: <input type="text" name="id" required>
+                                <br>
+                                <br>
+                                <br>
+                                Fecha de inicio: <input type="date" name="fechai" required>
+                                <br>
+                                <br>
+                                <br>
+                                Lote:
+                                <select name="identificadorLote">
+                                    <option>A</option>
+                                    <option>B</option>
+                                    <option>C</option>
+                                    <option>D</option>
+                                    <option>E</option>
+                                    <option>F</option>
+                                    <option>G</option>
+                                    <option>H</option>
+                                </select>
+                                Numero de filas: <input type="text" name="nFilas" required>
+                                <br>
+                                <br>
+                                <br>
+                                <center> <input type="reset" name="Limpiar" /> <input type="submit" name="Aceptar" value="Modificar" onclick="@Url.Content("~/Lote/Edit")" /> </center>
+                            </form>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="principal2">
+                <label class="lbl-modal2"><img src="~/Images/consultar.png" width="30px">@Html.ActionLink("Consultar Lote", "Index", "Lote", null, new { @style = "text-decoration:none; color: #000;" })</label>
+            </div>
+
+            @*<div id="principa99">
+                <input type="checkbox" id="btn-modal2">
+                <label for="btn-modal2" class="lbl-modal2"><img src="~/Images/consultar.png" width="30px">@Html.ActionLink("Consultar filas","Index","Fila")</label>
+                <div class="modal2">
+                </div>
+            </div>*@
+
+
+        </div>
+        <hr id="barra1">
+
+    </header>
+    <div class="container body-content">
+        @RenderBody()
+        @*<hr />*@
+        <footer>
+            @*<p>&copy; @DateTime.Now.Year LOSBICHOS x RanchoNuevo</p>*@
+        </footer>
+    </div>
+    @if (ViewBag.Alert != null)
+    {
+        <div class="alert alert-dismissable alert-info">
+            <button type="button" class="close" data-dismiss="alert">
+                &times;
+            </button>
+            <strong>Aviso!</strong> @ViewBag.Alert
+        </div>
+    }
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+@*@section scripts{
+    <script type='text/javascript'>
+
+    function validar(){
+
+
+    var todo_correcto = true;
+
+
+        if (document.getElementById('fechai').value.length != null) {
+        todo_correcto = false;
+    }
+
+    if(document.getElementById('lote').value.length != 0 ){
+        todo_correcto = false;
+    }
+
+        if (document.getElementById('fila').value.length != 0){
+        todo_correcto = false;
+    }
+
+        return todo_correcto;
+
+    </script>
+}*@
+
+

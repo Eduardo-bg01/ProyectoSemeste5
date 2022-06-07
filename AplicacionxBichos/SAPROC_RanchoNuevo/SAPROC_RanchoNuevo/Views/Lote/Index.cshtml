@@ -1,0 +1,164 @@
+﻿@model List<SAPROC_RanchoNuevo.Models.TableViewModel.LoteViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+@Styles.Render("~/css/admin.css")
+<body>
+    <article>
+        <div id="Grande">
+            <div id="mayor">
+                
+                <div id="mayor2">
+
+                    <input type="checkbox" id="btn-modal4">
+                    <label for="btn-modal4" class="lbl-modal4"><img src="~/Images/pdf.png" width="30px"> PDF</label>
+                    <div class="modal4">
+                        <div class="conten4">
+                            <header>
+                                <center><strong>PDF</strong></center>
+                            </header>
+                            <label for="btn-modal4">X</label>
+                            <div class="contenido4">
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div id="mayor3">
+
+                    <input type="checkbox" id="btn-modal5">
+                    <label for="btn-modal5" class="lbl-modal5"><img src="~/Images/excel.png" width="30px"> Excel</label>
+                    <div class="modal5">
+                        <div class="conten5">
+                            <header>
+                                <center><strong>Excel</strong></center>
+                            </header>
+                            <label for="btn-modal5">X</label>
+                            <div class="contenido5">
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div id="mayor4">
+
+                    <input type="checkbox" id="btn-modal6">
+                    <label for="btn-modal6" class="lbl-modal6"><img src="~/Images/Imprimir.png" width="30px"> Imprimir</label>
+                    <div class="modal6">
+                        <div class="conten6">
+                            <header>
+                                <center><strong>Imprimir</strong></center>
+                            </header>
+                            <label for="btn-modal6">X</label>
+                            <div class="contenido6">
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="gran">
+                <div id="gran1">
+                    <center> <h2> LOTES </h2> </center>
+                    <table id="tabla" border="">
+                        <tr>
+                            <th scope="row">ID</th>
+                            <th scope="row">Identificador lote</th>
+                            <th scope="row">Numero de filas</th>
+                            <th scope="row">Fecha inicio</th>
+                            <th scope="row">Fecha termino</th>
+                            <th scope="row">Estado lote</th>
+                            <th scope="row">Fecha registro</th>
+                        </tr>
+                        @foreach (var Oelemento in Model)
+                        {
+                            <tr>
+                                <td>@Oelemento.idLote</td>
+                                <td>@Oelemento.identificadorLote</td>
+                                <td>@Oelemento.nFilas</td>
+                                <td>@Oelemento.fecha_Inicio</td>
+                                <td>@Oelemento.fecha_Termino</td>
+                                <td>@Oelemento.estadoLote</td>
+                                <td>@Oelemento.fecha_Registro</td>
+                                <td>
+                                    @*<input onclick="jsDelete(@Oelemento.idLote);" type="button" value="Eliminar" />*@
+                                    <input onclick="document.location.href ='@Url.Content("~/Fila/Index")'" type="button" value="Ver filas" />
+                                    @*@Html.ActionLink("Consultar filas", "Index", "Fila")*@
+                                    <input onclick="jsFinalizar(@Oelemento.idLote);" type="button" value="Finalizar" />
+
+                                </td>
+
+                            </tr>
+
+                        }
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </article>
+
+</body>
+
+@*<script>
+        function jsFinalizar(id,fechaf) {
+            if (confirm("¿Estas seguro de que seas finalizar el lote " + id + " ?")) {
+                url = "@Url.Content("~/Lote/Finalizar")" + "/" + id + "/" + fechaf;
+
+                $.post(url, function (data) {
+                    if (data == "1") {
+                        document.location.href = "@Url.Content("~/")";
+                    } else {
+                        alert("Ha ocurrido un error")
+                    }
+                })
+            }
+        }
+    </script>*@
+
+<script>
+        function jsFinalizar(id) {
+            if (confirm("¿Estas seguro de que seas finalizar el lote " + id + " ?")) {
+                url = "@Url.Content("~/Lote/Finalizar")" + "/" + id;
+
+                $.post(url, function (data) {
+                    if (data == "1") {
+                        document.location.href = "@Url.Content("~/")";
+                    } else {
+                        alert("Ha ocurrido un error")
+                    }
+                })
+            }
+        }
+ </script>
+
+
+@*<script>
+        function jsDelete(id) {
+            if (confirm("¿Estas seguro de eliminar el lote " + id + " ?")) {
+                url = "@Url.Content("~/Lote/Delete")" + "/" + id;
+
+                $.post(url, function (data) {
+                    if (data == "1") {
+                        document.location.href = "@Url.Content("~/")";
+                    } else {
+                        alert("Ha ocurrido un error")
+                    }
+                })
+            }
+        }
+    </script>*@

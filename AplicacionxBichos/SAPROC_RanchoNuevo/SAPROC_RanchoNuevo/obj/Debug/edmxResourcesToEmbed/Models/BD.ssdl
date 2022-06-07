@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ranchonuevoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="actualizacion">
+    <Key>
+      <PropertyRef Name="idActualizacion" />
+    </Key>
+    <Property Name="idActualizacion" Type="int" Nullable="false" />
+    <Property Name="temperatura" Type="float" Nullable="false" />
+    <Property Name="nVolteos" Type="int" Nullable="false" />
+    <Property Name="Observaciones" Type="varchar(max)" Nullable="false" />
+    <Property Name="fechaActualizacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="configuracion">
+    <Key>
+      <PropertyRef Name="idConfiguracion" />
+    </Key>
+    <Property Name="idConfiguracion" Type="int" Nullable="false" />
+    <Property Name="consToneladas" Type="float" Nullable="false" />
+    <Property Name="nFilasLote" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="fila">
+    <Key>
+      <PropertyRef Name="idFila" />
+    </Key>
+    <Property Name="idFila" Type="int" Nullable="false" />
+    <Property Name="identificadorFila" Type="int" Nullable="false" />
+    <Property Name="nViajes" Type="int" Nullable="false" />
+    <Property Name="cCascarrillo" Type="float" Nullable="false" />
+    <Property Name="Comentarios" Type="varchar(max)" Nullable="false" />
+    <Property Name="toneladasLinea" Type="float" Nullable="false" />
+    <Property Name="Produccion" Type="float" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ranchonuevo.dbo.fila_actualizacion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="fila_actualizacion">
+    <Key>
+      <PropertyRef Name="filaID" />
+      <PropertyRef Name="actID" />
+    </Key>
+    <Property Name="filaID" Type="int" Nullable="false" />
+    <Property Name="actID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="lote">
+    <Key>
+      <PropertyRef Name="idLote" />
+    </Key>
+    <Property Name="idLote" Type="int" Nullable="false" />
+    <Property Name="identificadorLote" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="nFilas" Type="int" Nullable="false" />
+    <Property Name="fecha_Inicio" Type="date" Nullable="false" />
+    <Property Name="fecha_Termino" Type="date" Nullable="false" />
+    <Property Name="estadoLote" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="fechaRegistro" Type="datetime" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ranchonuevo.dbo.lote_tiene_filas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="lote_tiene_filas">
+    <Key>
+      <PropertyRef Name="loteID" />
+      <PropertyRef Name="fila_ID" />
+    </Key>
+    <Property Name="loteID" Type="int" Nullable="false" />
+    <Property Name="fila_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="rol">
+    <Key>
+      <PropertyRef Name="idRol" />
+    </Key>
+    <Property Name="idRol" Type="int" Nullable="false" />
+    <Property Name="tipoRol" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="usuario">
+    <Key>
+      <PropertyRef Name="idUsuario" />
+    </Key>
+    <Property Name="idUsuario" Type="int" Nullable="false" />
+    <Property Name="usuario" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="contraseña" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ranchonuevo.dbo.usuario_hace_actualizacion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="usuario_hace_actualizacion">
+    <Key>
+      <PropertyRef Name="actualizacion_ID" />
+      <PropertyRef Name="usr_ID" />
+    </Key>
+    <Property Name="actualizacion_ID" Type="int" Nullable="false" />
+    <Property Name="usr_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ranchonuevo.dbo.usuario_tiene_rol' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="usuario_tiene_rol">
+    <Key>
+      <PropertyRef Name="rol_ID" />
+      <PropertyRef Name="usuarioID" />
+    </Key>
+    <Property Name="rol_ID" Type="int" Nullable="false" />
+    <Property Name="usuarioID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__fila_actu__actID__34C8D9D1">
+    <End Role="actualizacion" Type="Self.actualizacion" Multiplicity="1" />
+    <End Role="fila_actualizacion" Type="Self.fila_actualizacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="actualizacion">
+        <PropertyRef Name="idActualizacion" />
+      </Principal>
+      <Dependent Role="fila_actualizacion">
+        <PropertyRef Name="actID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__fila_actu__filaI__33D4B598">
+    <End Role="fila" Type="Self.fila" Multiplicity="1" />
+    <End Role="fila_actualizacion" Type="Self.fila_actualizacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fila">
+        <PropertyRef Name="idFila" />
+      </Principal>
+      <Dependent Role="fila_actualizacion">
+        <PropertyRef Name="filaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__lote_tien__fila___37A5467C">
+    <End Role="fila" Type="Self.fila" Multiplicity="1" />
+    <End Role="lote_tiene_filas" Type="Self.lote_tiene_filas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fila">
+        <PropertyRef Name="idFila" />
+      </Principal>
+      <Dependent Role="lote_tiene_filas">
+        <PropertyRef Name="fila_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__lote_tien__loteI__36B12243">
+    <End Role="lote" Type="Self.lote" Multiplicity="1" />
+    <End Role="lote_tiene_filas" Type="Self.lote_tiene_filas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="lote">
+        <PropertyRef Name="idLote" />
+      </Principal>
+      <Dependent Role="lote_tiene_filas">
+        <PropertyRef Name="loteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__usuario_h__actua__398D8EEE">
+    <End Role="actualizacion" Type="Self.actualizacion" Multiplicity="1" />
+    <End Role="usuario_hace_actualizacion" Type="Self.usuario_hace_actualizacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="actualizacion">
+        <PropertyRef Name="idActualizacion" />
+      </Principal>
+      <Dependent Role="usuario_hace_actualizacion">
+        <PropertyRef Name="actualizacion_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__usuario_h__usr_I__3A81B327">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="usuario_hace_actualizacion" Type="Self.usuario_hace_actualizacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="idUsuario" />
+      </Principal>
+      <Dependent Role="usuario_hace_actualizacion">
+        <PropertyRef Name="usr_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__usuario_t__rol_I__3C69FB99">
+    <End Role="rol" Type="Self.rol" Multiplicity="1" />
+    <End Role="usuario_tiene_rol" Type="Self.usuario_tiene_rol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rol">
+        <PropertyRef Name="idRol" />
+      </Principal>
+      <Dependent Role="usuario_tiene_rol">
+        <PropertyRef Name="rol_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__usuario_t__usuar__3D5E1FD2">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="usuario_tiene_rol" Type="Self.usuario_tiene_rol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="idUsuario" />
+      </Principal>
+      <Dependent Role="usuario_tiene_rol">
+        <PropertyRef Name="usuarioID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ranchonuevoModelStoreContainer">
+    <EntitySet Name="actualizacion" EntityType="Self.actualizacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="configuracion" EntityType="Self.configuracion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="fila" EntityType="Self.fila" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lote" EntityType="Self.lote" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rol" EntityType="Self.rol" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="fila_actualizacion" EntityType="Self.fila_actualizacion" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [fila_actualizacion].[filaID] AS [filaID], 
+    [fila_actualizacion].[actID] AS [actID]
+    FROM [dbo].[fila_actualizacion] AS [fila_actualizacion]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="lote_tiene_filas" EntityType="Self.lote_tiene_filas" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [lote_tiene_filas].[loteID] AS [loteID], 
+    [lote_tiene_filas].[fila_ID] AS [fila_ID]
+    FROM [dbo].[lote_tiene_filas] AS [lote_tiene_filas]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="usuario_hace_actualizacion" EntityType="Self.usuario_hace_actualizacion" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [usuario_hace_actualizacion].[actualizacion_ID] AS [actualizacion_ID], 
+    [usuario_hace_actualizacion].[usr_ID] AS [usr_ID]
+    FROM [dbo].[usuario_hace_actualizacion] AS [usuario_hace_actualizacion]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="usuario_tiene_rol" EntityType="Self.usuario_tiene_rol" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [usuario_tiene_rol].[rol_ID] AS [rol_ID], 
+    [usuario_tiene_rol].[usuarioID] AS [usuarioID]
+    FROM [dbo].[usuario_tiene_rol] AS [usuario_tiene_rol]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__fila_actu__actID__34C8D9D1" Association="Self.FK__fila_actu__actID__34C8D9D1">
+      <End Role="actualizacion" EntitySet="actualizacion" />
+      <End Role="fila_actualizacion" EntitySet="fila_actualizacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__fila_actu__filaI__33D4B598" Association="Self.FK__fila_actu__filaI__33D4B598">
+      <End Role="fila" EntitySet="fila" />
+      <End Role="fila_actualizacion" EntitySet="fila_actualizacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__lote_tien__fila___37A5467C" Association="Self.FK__lote_tien__fila___37A5467C">
+      <End Role="fila" EntitySet="fila" />
+      <End Role="lote_tiene_filas" EntitySet="lote_tiene_filas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__lote_tien__loteI__36B12243" Association="Self.FK__lote_tien__loteI__36B12243">
+      <End Role="lote" EntitySet="lote" />
+      <End Role="lote_tiene_filas" EntitySet="lote_tiene_filas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__usuario_h__actua__398D8EEE" Association="Self.FK__usuario_h__actua__398D8EEE">
+      <End Role="actualizacion" EntitySet="actualizacion" />
+      <End Role="usuario_hace_actualizacion" EntitySet="usuario_hace_actualizacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__usuario_h__usr_I__3A81B327" Association="Self.FK__usuario_h__usr_I__3A81B327">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="usuario_hace_actualizacion" EntitySet="usuario_hace_actualizacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__usuario_t__rol_I__3C69FB99" Association="Self.FK__usuario_t__rol_I__3C69FB99">
+      <End Role="rol" EntitySet="rol" />
+      <End Role="usuario_tiene_rol" EntitySet="usuario_tiene_rol" />
+    </AssociationSet>
+    <AssociationSet Name="FK__usuario_t__usuar__3D5E1FD2" Association="Self.FK__usuario_t__usuar__3D5E1FD2">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="usuario_tiene_rol" EntitySet="usuario_tiene_rol" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
